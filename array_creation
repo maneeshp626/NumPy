@@ -10,9 +10,10 @@ ndarray.dtype : Object describing the type of the elements in the array.
 ndarray.itemsize : The size in bytes of each element of the array. For example for float64, itemsize is 64/8=8 bytes 
 
 
-1. Conversion from other Python structures (e.g., lists, tuples)
 *****************************************************************************************************************
-@ Using np.array(a, [dtype, copy=True, order=[‘K’ or ‘F’], ndmin]):
+						1. Conversion from other Python structures (e.g., lists, tuples)
+*****************************************************************************************************************
+@@ Using np.array(a, [dtype, copy=True, order=[‘K’ or ‘F’], ndmin]):
 Note : parameters in [] are optional
 
 # From list
@@ -29,9 +30,10 @@ a = np.array([[1,2,3], [4,5,6]])
 
 # From list of list & tuple
 a = np.array([(1,2,3), [4,5,6]])
-*****************************************************************************************************************
 
-@ Using np.asarray(a, [dtype, order]): Convert the input to an array.
+
+
+@@ Using np.asarray(a, [dtype, order]): Convert the input to an array.
 # a can be lists, lists of tuples, tuples, tuples of tuples, tuples of lists and ndarrays.
 Note : Array is not copied. If dtype is set and does not match to the existing dtype of array, then it is copied.
 
@@ -42,44 +44,51 @@ a = np.array([1, 2], dtype=np.float32)
 np.asarray(a, dtype=np.float32) is a              # True
 np.asarray(a, dtype=np.float64) is a              # False
 
-*****************************************************************************************************************
-@ Using np.copy(a) : Return an array copy of the given object.
+
+
+@@ Using np.copy(a) : Return an array copy of the given object.
 x = np.array([1, 2, 3])
 y = x
 z = np.copy(x)
 # Note that, when we modify x, y changes, but not z.
+
+
+
+
+
+
 *****************************************************************************************************************
-
-
-
-
-
-
-2. Intrinsic NumPy Array Creation
+										2. Intrinsic NumPy Array Creation
 *****************************************************************************************************************
-@ np.empty(shape, [dtype, order]) : Return a new array of given shape and type, without initializing entries.
-
+@@ np.empty(shape, [dtype, order]) : Return a new array of given shape and type, without initializing entries.
 np.empty([2, 2])
 np.empty([2, 2], dtype=int)
-*****************************************************************************************************************
-@ np.zeros(shape, [dtype, order]) : Return a new array of given shape and type, filled with zeros.
 
+
+
+@@ np.zeros(shape, [dtype, order]) : Return a new array of given shape and type, filled with zeros.
 np.zeros(5)
 np.zeros((2, 1))
 np.zeros((2, 1), dtype=int)
-*****************************************************************************************************************
-@ np.ones(shape, [dtype, order]) : Return a new array of given shape and type, filled with ones.
+
+
+
+@@ np.ones(shape, [dtype, order]) : Return a new array of given shape and type, filled with ones.
 np.ones(5)
 np.ones((2, 1))
 np.ones((2, 1), dtype = int)
-*****************************************************************************************************************
-@ np.full(shape, fill_value, [dtype, order]) : Return a new array of given shape and type, filled with fill_value.
+
+
+
+@@ np.full(shape, fill_value, [dtype, order]) : Return a new array of given shape and type, filled with fill_value.
 np.full((2, 2), np.inf)
 np.full((2, 2), 10)
-*****************************************************************************************************************
 
-@ np.eye(rows, columns, k, dtype, order) : Return a 2-D array with ones on the diagonal and zeros elsewhere.
-@ Index of the diagonal(k): 0 (the default) refers to the main diagonal, a positive value refers to an upper diagonal, and a negative value to a lower diagonal.
+
+
+@@ np.eye(rows, columns, k, dtype, order) : Return a 2-D array with ones on the diagonal and zeros elsewhere.
+# Index of the diagonal(k): 0 (the default) refers to the main diagonal, a positive value refers to an 
+  upper diagonal, and a negative value to a lower diagonal.
 
 np.eye(4, dtype=int)
 [[1 0 0 0]
@@ -98,31 +107,117 @@ np.eye(4, k=-3, dtype=int)
  [0 0 0 0]
  [0 0 0 0]
  [1 0 0 0]]
-*******************************************************************************************************************
-@ np.identity(n, dtype) : Return the identity matrix.
+
+
+
+@@ np.identity(n, dtype) : Return the identity matrix.
 [[1. 0. 0.]
  [0. 1. 0.]
  [0. 0. 1.]]
 
-*******************************************************************************************************************
 
-@ np.arrange(start, stop, step, dtype) : Return evenly spaced values within a given interval.
+
+@@ np.arrange(start, stop, step, dtype) : Return evenly spaced values within a given interval.
 np.arange(3)                          # [0, 1, 2]
 np.arange(3.0)                        # [ 0.,  1.,  2.]
 np.arange(3,7)                        # [3, 4, 5, 6]
 np.arange(3,7,2)                      # [3, 5]
-******************************************************************************************************************
 
-@ np.linspace(start, stop, num, endpoint=True, dtype) : Return evenly spaced numbers over a specified interval.
+
+
+@@ np.linspace(start, stop, num, endpoint=True, dtype) : Return evenly spaced numbers over a specified interval.
 np.linspace(2.0, 3.0, num=5)                   # [2., 2.25, 2.5, 2.75, 3.]
 np.linspace(2.0, 3.0, num=5, endpoint=False)   # [2., 2.2, 2.4, 2.6, 2.8]
-*****************************************************************************************************************
+
+
+
+# Other methods
+@ np.empty_like(a, [dtype, order, shape])
+@ np.zeros_like(a, [dtype, order, shape])
+@ np.ones_like(a, [dtype, order, shape])
+@ np.full_like(a, [fill_value, dtype, order, shape])
 
 
 
 
+**************************************************************************************************************
+										3. Use of special library functions
+**************************************************************************************************************
+#Simple random data
+import numpy.random as rd
+
+@@ rd.rand(d0,d1,d2,...) : Random values from a uniform distribution over [0, 1) in a given shape.
+rd.rand()                       # 0.19792804630928973
+rd.rand(3)                      # [0.89729931 0.52180532 0.85391929]
+rd.rand(3,2)
+[[0.82204357 0.56171267]
+ [0.61558992 0.41793137]
+ [0.30516367 0.1722181 ]]
 
 
+
+@@ rd.randn(d0,d1,d2,...) : Return a sample from the “standard normal” distribution.
+Note: For random samples from N(mu, sigma^2), use:          sigma * np.random.randn(...) + mu
+np.random.randn()                           # -0.6836879807941314
+
+N(3, 6.25)
+2.5 * rd.randn(2, 2) + 3
+[[4.12484103 2.06994804]
+ [5.15614565 6.85061884]]
+
+
+@@ rd.randint(low, high=None, size=None, dtype='l') : Return random integers from low (inclusive) to high (exclusive).
+np.random.randint(2, size=10)                            # [1, 0, 0, 0, 1, 1, 0, 0, 1, 0]
+
+rd.randint(5, size=(2, 4))
+[[4, 0, 2, 1],
+ [3, 2, 2, 0]]
+
+
+
+@@ rd.random_sample(size=None) : Return random floats in the half-open interval [0.0, 1.0).
+Note: To generate random sample in range [a,b) where a < b use: (b - a) * random_sample() + a
+rd.random_sample()                      # 0.47108547995356098
+
+rd.random_sample((5,))           # [ 0.30220482,  0.86820401,  0.1654503 ,  0.11659149,  0.54323428]
+
+random numbers from [-5, 0):
+5 * rd.random_sample((3, 2)) - 5
+	  [[-3.99149989, -0.52338984],
+       [-2.99091858, -0.79479508],
+       [-1.23204345, -1.75224494]]
+
+
+
+@@ rd.choice(a, size=None, replace=True) : Generates a random sample from a given 1-D array
+Note: If a is an int, the random sample is generated as if a were np.arange(a)
+
+rd.choice(5, 3)                         # [0, 3, 4]
+rd.choice(5, 3, replace=False)          # [3,1,0]
+
+
+
+# Permutations
+@@ rd.suffle(a) : Modify a sequence by shuffling its contents or along the first axis of a multi-dimensional array.
+arr = np.arange(10)
+rd.shuffle(arr)                                  # [1 7 5 2 9 4 3 6 0 8]
+
+arr = np.arange(9).reshape((3, 3))
+rd.shuffle(arr)
+[[0 1 2]
+ [6 7 8]
+ [3 4 5]]
+
+
+
+# Random generator
+@@ rd.RandomState(seed=None) : Container for the Mersenne Twister pseudo-random number generator.
+@@ rd.seed(seed=None) : Seed the generator. This method is called when RandomState is initialized. It can be called 
+                        again to re-seed the generator.
+
+
+
+# Distributions
 
 
 
