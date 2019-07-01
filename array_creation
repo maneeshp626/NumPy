@@ -1,0 +1,62 @@
+# Import numpy as np 
+import numpy as np
+
+# Some important attributes of numpy array
+ndarray.ndim  : The number of axes or dimensions of the array
+ndarray.shape : This is a tuple of integers indicating the size of the array in each dimension. For example if a matrix  
+                has n rows and m columns, shape will be (n,m). 
+ndarray.size  : Total number of elements of the array. This is equal to the product of the elements of shape.
+ndarray.dtype : Object describing the type of the elements in the array.
+ndarray.itemsize : The size in bytes of each element of the array. For example for float64, itemsize is 64/8=8 bytes 
+
+
+1. Conversion from other Python structures (e.g., lists, tuples)
+
+@ Using np.array(a, [dtype, copy=True, order=[‘K’ or ‘F’], ndmin]):
+Note : parameters in [] are optional
+
+# From list
+a = np.array([2,3,4])
+
+# From tuple
+a = np.array((2,3,4))
+
+# From list of tuples
+a = np.array([(1,2,3), (4,5,6)])
+
+# From list of lists
+a = np.array([[1,2,3], [4,5,6]])
+
+# From list of list & tuple
+a = np.array([(1,2,3), [4,5,6]])
+
+
+@ Using np.asarray(a, [dtype, order]): Convert the input to an array.
+# a can be lists, lists of tuples, tuples, tuples of tuples, tuples of lists and ndarrays.
+Note : Array is not copied. If dtype is set and does not match to the existing dtype of array, then it is copied.
+
+a = np.array([1, 2])
+np.asarray(a) is a                    # True
+
+a = np.array([1, 2], dtype=np.float32)
+np.asarray(a, dtype=np.float32) is a              # True
+np.asarray(a, dtype=np.float64) is a              # False
+
+
+@ Using np.copy(a) : Return an array copy of the given object.
+x = np.array([1, 2, 3])
+y = x
+z = np.copy(x)
+# Note that, when we modify x, y changes, but not z.
+
+
+
+
+
+
+
+
+
+
+
+
