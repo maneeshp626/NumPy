@@ -11,7 +11,7 @@ ndarray.itemsize : The size in bytes of each element of the array. For example f
 
 
 *****************************************************************************************************************
-						1. Conversion from other Python structures (e.g., lists, tuples)
+			1. Conversion from other Python structures (e.g., lists, tuples)
 *****************************************************************************************************************
 @@ Using np.array(a, [dtype, copy=True, order=[‘K’ or ‘F’], ndmin]):
 Note : parameters in [] are optional
@@ -58,7 +58,7 @@ z = np.copy(x)
 
 
 *****************************************************************************************************************
-										2. Intrinsic NumPy Array Creation
+					2. Intrinsic NumPy Array Creation
 *****************************************************************************************************************
 @@ np.empty(shape, [dtype, order]) : Return a new array of given shape and type, without initializing entries.
 np.empty([2, 2])
@@ -141,7 +141,7 @@ np.linspace(2.0, 3.0, num=5, endpoint=False)   # [2., 2.2, 2.4, 2.6, 2.8]
 
 
 **************************************************************************************************************
-										3. Use of special library functions
+					3. Use of special library functions
 **************************************************************************************************************
 #Simple random data
 import numpy.random as rd
